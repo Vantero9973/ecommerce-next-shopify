@@ -2,12 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Stripe from "stripe";
 import hero from "../media/hero.jpg";
-import {
-  ArrowPathIcon,
-  GlobeAltIcon,
-  TagIcon,
-  TruckIcon,
-} from "@heroicons/react/20/solid";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -167,10 +161,13 @@ export default async function Home() {
 
         <div className="relative bg-gray-800 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
           <div className="absolute inset-0 overflow-hidden">
-            <img
+            <Image
               alt=""
               src="https://tailwindui.com/img/ecommerce-images/home-page-03-feature-section-full-width.jpg"
-              className="h-full w-full object-cover object-center"
+              width={500}
+              height={300}
+              placeholder="empty"
+              className="!h-full !w-full object-cover object-center"
             />
           </div>
           <div
@@ -238,9 +235,12 @@ export default async function Home() {
                   )}
                 >
                   <div className="aspect-h-2 aspect-w-5 overflow-hidden rounded-lg bg-gray-100">
-                    <img
+                    <Image
                       alt={feature.imageAlt}
                       src={feature.imageSrc}
+                      width={500}
+                      height={300}
+                      placeholder="empty"
                       className="object-cover object-center"
                     />
                   </div>
@@ -275,51 +275,57 @@ export default async function Home() {
                   <div className="ml-24 flex space-x-6 sm:ml-3 lg:space-x-8">
                     <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
                       <div className="flex-shrink-0">
-                        <img
+                        <Image
                           alt=""
-                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
+                          src={hero}
+                          placeholder="blur"
                           className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                         />
                       </div>
 
                       <div className="mt-6 flex-shrink-0 sm:mt-0">
-                        <img
+                        <Image
                           alt=""
-                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
+                          src={hero}
+                          placeholder="blur"
                           className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                         />
                       </div>
                     </div>
                     <div className="flex space-x-6 sm:-mt-20 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
                       <div className="flex-shrink-0">
-                        <img
+                        <Image
                           alt=""
-                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-01.jpg"
+                          src={hero}
+                          placeholder="blur"
                           className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                         />
                       </div>
 
                       <div className="mt-6 flex-shrink-0 sm:mt-0">
-                        <img
+                        <Image
                           alt=""
-                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-02.jpg"
+                          src={hero}
+                          placeholder="blur"
                           className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                         />
                       </div>
                     </div>
                     <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
                       <div className="flex-shrink-0">
-                        <img
+                        <Image
                           alt=""
-                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
+                          src={hero}
+                          placeholder="blur"
                           className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                         />
                       </div>
 
                       <div className="mt-6 flex-shrink-0 sm:mt-0">
-                        <img
+                        <Image
                           alt=""
-                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
+                          src={hero}
+                          placeholder="blur"
                           className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                         />
                       </div>
