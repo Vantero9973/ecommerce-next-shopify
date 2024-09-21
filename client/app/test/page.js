@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Stripe from "stripe";
 
 // Initialize Stripe
@@ -46,12 +47,15 @@ export default async function AggressiveProductsPage() {
 
                   {/* Display image if available */}
                   {product.images.length > 0 && (
-                    <img
+                    <Image
                       src={product.images[0]}
                       alt={product.name}
+                      width={500}
+                      height={300}
+                      placeholder="empty"
                       style={{
-                        width: "100%",
-                        height: "auto",
+                        width: "100% !important",
+                        height: "auto !important",
                         borderRadius: "8px",
                       }}
                     />
@@ -100,12 +104,15 @@ export default async function AggressiveProductsPage() {
 
                   {/* Display image if available */}
                   {product.images.length > 0 && (
-                    <img
+                    <Image
                       src={product.images[0]}
                       alt={product.name}
+                      width={500}
+                      height={300}
+                      placeholder="empty"
                       style={{
-                        width: "100%",
-                        height: "auto",
+                        width: "100% !important",
+                        height: "auto !important",
                         borderRadius: "8px",
                       }}
                     />

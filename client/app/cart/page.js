@@ -1,10 +1,11 @@
+import Image from "next/image";
+import Link from "next/link";
 import {
   CheckIcon,
   ClockIcon,
   QuestionMarkCircleIcon,
   XMarkIcon as XMarkIconMini,
 } from "@heroicons/react/20/solid";
-import Link from "next/link";
 
 const products = [
   {
@@ -55,34 +56,7 @@ const relatedProducts = [
     price: "$118",
     color: "Natural",
   },
-  // More products...
 ];
-const footerNavigation = {
-  products: [
-    { name: "Bags", href: "#" },
-    { name: "Tees", href: "#" },
-    { name: "Objects", href: "#" },
-    { name: "Home Goods", href: "#" },
-    { name: "Accessories", href: "#" },
-  ],
-  company: [
-    { name: "Who we are", href: "#" },
-    { name: "Sustainability", href: "#" },
-    { name: "Press", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Terms & Conditions", href: "#" },
-    { name: "Privacy", href: "#" },
-  ],
-  customerService: [
-    { name: "Contact", href: "#" },
-    { name: "Shipping", href: "#" },
-    { name: "Returns", href: "#" },
-    { name: "Warranty", href: "#" },
-    { name: "Secure Payments", href: "#" },
-    { name: "FAQ", href: "#" },
-    { name: "Find a store", href: "#" },
-  ],
-};
 
 export default function Example() {
   return (
@@ -105,10 +79,13 @@ export default function Example() {
               {products.map((product, productIdx) => (
                 <li key={product.id} className="flex py-6 sm:py-10">
                   <div className="flex-shrink-0">
-                    <img
+                    <Image
                       alt={product.imageAlt}
                       src={product.imageSrc}
-                      className="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48"
+                      width={500}
+                      height={300}
+                      placeholder="empty"
+                      className="!h-24 !w-24 rounded-md object-cover object-center sm:h-48 sm:w-48"
                     />
                   </div>
 
@@ -287,10 +264,12 @@ export default function Example() {
             {relatedProducts.map((relatedProduct) => (
               <div key={relatedProduct.id} className="group relative">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-80">
-                  <img
+                  <Image
                     alt={relatedProduct.imageAlt}
                     src={relatedProduct.imageSrc}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    width={500}
+                    height={300}
+                    className="!h-full !w-full object-cover object-center"
                   />
                 </div>
                 <div className="mt-4 flex justify-between">

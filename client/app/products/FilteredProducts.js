@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Dialog,
@@ -344,10 +345,13 @@ export default function FilteredProducts({ sortedProducts }) {
                         className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 divide-y divide-gray-200 bg-white"
                       >
                         <div className="aspect-h-4 aspect-w-3 bg-white shadow sm:aspect-none group-hover:opacity-75 sm:h-96">
-                          <img
+                          <Image
                             src={product.images[0]}
                             alt={product.name}
-                            className="h-full w-full object-contain object-center sm:h-full sm:w-full"
+                            width={500}
+                            height={300}
+                            placeholder="empty"
+                            className="!h-full !w-full object-contain object-center"
                           />
                         </div>
                         <div className="flex flex-1 flex-col space-y-2 p-4">
