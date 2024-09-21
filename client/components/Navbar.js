@@ -23,6 +23,7 @@ import {
   ShoppingCartIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { GiMountaintop } from "react-icons/gi";
 
 const navigation = {
   categories: [
@@ -222,11 +223,7 @@ export default function Example() {
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                   <a href="#">
                     <span className="sr-only">Your Company</span>
-                    <img
-                      alt=""
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                      className="h-8 w-auto"
-                    />
+                    <GiMountaintop className="my-auto h-10 w-10 rounded-full bg-sky-600 text-white" />
                   </a>
                 </div>
 
