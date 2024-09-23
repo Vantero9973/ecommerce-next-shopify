@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useCart } from "../../context/CartContext";
 import {
   Disclosure,
   DisclosureButton,
@@ -19,10 +20,24 @@ import {
 } from "@heroicons/react/20/solid";
 
 export default function Product({ price, product, relatedProducts }) {
+  const { addToCart } = useCart();
+
   const pages = [
     { name: "Products", href: "/products", current: false },
     { name: product.name, href: `/products/${product.id}`, current: true },
   ];
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.default_price?.unit_amount / 100,
+      quantity: 1,
+      image: product.images[0],
+    });
+  };
 
   return (
     <div className="bg-white">
@@ -119,7 +134,7 @@ export default function Product({ price, product, relatedProducts }) {
                 <p className="text-gray-900">{product.description}</p>
               </div>
 
-              <form className="mt-6">
+              <form className="mt-6" onSubmit={handleAddToCart}>
                 <div className="mt-10 flex">
                   <button
                     type="submit"

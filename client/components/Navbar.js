@@ -1,7 +1,9 @@
 "use client";
 
 import { Fragment, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
+import { useCart } from "../app/context/CartContext";
 import {
   Dialog,
   DialogBackdrop,
@@ -24,6 +26,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { GiMountaintop } from "react-icons/gi";
+import Search from "./Search";
 
 const navigation = {
   categories: [
@@ -32,7 +35,7 @@ const navigation = {
       featured: [
         {
           name: "All",
-          href: "/products/trending",
+          href: "/products",
           imageSrc:
             "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
           imageAlt:
@@ -64,54 +67,27 @@ const navigation = {
         },
       ],
     },
-    {
-      name: "Men",
-      featured: [
-        {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-01.jpg",
-          imageAlt:
-            "Hats and sweaters on wood shelves next to various colors of t-shirts on hangers.",
-        },
-        {
-          name: "Basic Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-02.jpg",
-          imageAlt: "Model wearing light heather gray t-shirt.",
-        },
-        {
-          name: "Accessories",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-03.jpg",
-          imageAlt:
-            "Grey 6-panel baseball hat with black brim, black mountain graphic on front, and light heather gray body.",
-        },
-        {
-          name: "Carry",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-04.jpg",
-          imageAlt:
-            "Model putting folded cash into slim card holder olive leather wallet with hand stitching.",
-        },
-      ],
-    },
   ],
   pages: [
-    { name: "Company", href: "#" },
-    { name: "Stores", href: "#" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
   ],
 };
 
 export default function Example() {
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const { cartItems } = useCart();
+
+  const totalItems = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   return (
     <div className="bg-white">
+      <Search open={searchOpen} setOpen={setSearchOpen} />
       <Dialog open={open} onClose={setOpen} className="relative z-40 lg:hidden">
         <DialogBackdrop
           transition
@@ -221,10 +197,10 @@ export default function Example() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex h-[72px] items-center justify-between">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
-                  <a href="#">
+                  <Link href="/">
                     <span className="sr-only">Your Company</span>
                     <GiMountaintop className="my-auto h-10 w-10 rounded-full bg-sky-600 text-white" />
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="hidden h-full lg:flex">
@@ -320,16 +296,16 @@ export default function Example() {
                     <Bars3Icon aria-hidden="true" className="h-6 w-6" />
                   </button>
 
-                  <a
-                    href="#"
+                  <div
                     className="ml-2 p-2 text-gray-400 hover:text-gray-500"
+                    onClick={() => setSearchOpen(!searchOpen)}
                   >
                     <span className="sr-only">Search</span>
                     <MagnifyingGlassIcon
                       aria-hidden="true"
                       className="h-6 w-6"
                     />
-                  </a>
+                  </div>
                 </div>
 
                 <a href="#" className="lg:hidden">
@@ -345,43 +321,32 @@ export default function Example() {
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">
-                  <a
-                    href="#"
-                    className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
+                  <div
+                    className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block cursor-pointer"
+                    onClick={() => setSearchOpen(!searchOpen)}
                   >
-                    Search
-                  </a>
+                    <MagnifyingGlassIcon
+                      aria-hidden="true"
+                      className="h-6 w-6 flex-shrink-0 text-gray-500 hover:text-gray-700"
+                    />
+                  </div>
 
-                  <div className="flex items-center lg:ml-8">
-                    <a
-                      href="#"
-                      className="p-2 text-gray-400 hover:text-gray-500 lg:hidden"
+                  <div className="ml-4 flow-root lg:ml-8">
+                    <Link
+                      href="/cart"
+                      className="group -m-2 flex items-center p-2"
                     >
-                      <span className="sr-only">Help</span>
-                      <QuestionMarkCircleIcon
+                      <ShoppingCartIcon
                         aria-hidden="true"
-                        className="h-6 w-6"
+                        className="h-6 w-6 flex-shrink-0 text-gray-500 group-hover:text-gray-700"
                       />
-                    </a>
-                    <a
-                      href="#"
-                      className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
-                    >
-                      Help
-                    </a>
-
-                    <div className="ml-4 flow-root lg:ml-8">
-                      <a href="#" className="group -m-2 flex items-center p-2">
-                        <ShoppingCartIcon
-                          aria-hidden="true"
-                          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                        />
-                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                          0
-                        </span>
-                        <span className="sr-only">items in cart, view bag</span>
-                      </a>
-                    </div>
+                      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                        {totalItems}
+                      </span>
+                      <span className="sr-only">
+                        {totalItems} items in cart, view bag
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </div>

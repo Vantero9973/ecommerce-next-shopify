@@ -5,29 +5,34 @@ import hero from "../media/hero.jpg";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-const features = [
+const callouts = [
   {
-    name: "Minimal and thoughtful",
-    description:
-      'Our laptop sleeve is compact and precisely fits 13" devices. The zipper allows you to access the interior with ease, and the front pouch provides a convenient place for your charger cable.',
+    name: "Aggressive",
+    description: "Work from home accessories",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-feature-07-detail-01.jpg",
+      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg",
     imageAlt:
-      "White canvas laptop sleeve with gray felt interior, silver zipper, and tan leather zipper pull.",
+      "Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.",
+    href: "#",
   },
   {
-    name: "Refined details",
-    description:
-      "We design every detail with the best materials and finishes. This laptop sleeve features durable canvas with double-stitched construction, a felt interior, and a high quality zipper that hold up to daily use.",
+    name: "Moderate",
+    description: "Journals and note-taking",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-feature-07-detail-02.jpg",
-    imageAlt: "Detail of zipper pull with tan leather and silver rivet.",
+      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg",
+    imageAlt:
+      "Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.",
+    href: "#",
+  },
+  {
+    name: "Neutral",
+    description: "Daily commute essentials",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg",
+    imageAlt: "Collection of four insulated travel bottles on wooden shelf.",
+    href: "#",
   },
 ];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default async function Home() {
   const products = await stripe.products.list({
@@ -82,6 +87,69 @@ export default async function Home() {
           </div>
         </div>
 
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
+            <h2 className="text-2xl font-bold text-gray-900">Collections</h2>
+
+            <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+              {callouts.map((callout) => (
+                <div key={callout.name} className="group relative">
+                  <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+                    <img
+                      alt={callout.imageAlt}
+                      src={callout.imageSrc}
+                      className="h-full w-full object-cover object-center"
+                    />
+                  </div>
+                  <h3 className="mt-6 text-sm text-gray-500">
+                    <a href={callout.href}>
+                      <span className="absolute inset-0" />
+                      {callout.name}
+                    </a>
+                  </h3>
+                  <p className="text-base font-semibold text-gray-900">
+                    {callout.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="relative bg-gray-800 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
+          <div className="absolute inset-0 overflow-hidden">
+            <Image
+              alt=""
+              src="https://tailwindui.com/img/ecommerce-images/home-page-03-feature-section-full-width.jpg"
+              width={500}
+              height={300}
+              placeholder="empty"
+              className="!h-full !w-full object-cover object-center"
+            />
+          </div>
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gray-900 bg-opacity-50"
+          />
+          <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Long-term thinking
+            </h2>
+            <p className="mt-3 text-xl text-white">
+              We're committed to responsible, sustainable, and ethical
+              manufacturing. Our small-scale approach allows us to focus on
+              quality and reduce our impact. We're doing our best to delay the
+              inevitable heat-death of the universe.
+            </p>
+            <a
+              href="#"
+              className="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto"
+            >
+              Read our story
+            </a>
+          </div>
+        </div>
+
         <section aria-labelledby="trending-heading">
           <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
             <div className="md:flex md:items-center md:justify-between">
@@ -91,13 +159,13 @@ export default async function Home() {
               >
                 Trending Products
               </h2>
-              <a
-                href="#"
-                className="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 md:block"
+              <Link
+                href="/products/trending"
+                className="hidden text-sm font-medium text-sky-600 hover:text-sky-500 md:block"
               >
                 Shop the collection
                 <span aria-hidden="true"> &rarr;</span>
-              </a>
+              </Link>
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
@@ -158,97 +226,6 @@ export default async function Home() {
             </div>
           </div>
         </section>
-
-        <div className="relative bg-gray-800 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
-          <div className="absolute inset-0 overflow-hidden">
-            <Image
-              alt=""
-              src="https://tailwindui.com/img/ecommerce-images/home-page-03-feature-section-full-width.jpg"
-              width={500}
-              height={300}
-              placeholder="empty"
-              className="!h-full !w-full object-cover object-center"
-            />
-          </div>
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-gray-900 bg-opacity-50"
-          />
-          <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Long-term thinking
-            </h2>
-            <p className="mt-3 text-xl text-white">
-              We're committed to responsible, sustainable, and ethical
-              manufacturing. Our small-scale approach allows us to focus on
-              quality and reduce our impact. We're doing our best to delay the
-              inevitable heat-death of the universe.
-            </p>
-            <a
-              href="#"
-              className="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto"
-            >
-              Read our story
-            </a>
-          </div>
-        </div>
-
-        <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Protect your device
-            </h2>
-            <p className="mt-4 text-gray-500">
-              As a digital creative, your laptop or tablet is at the center of
-              your work. Keep your device safe with a fabric sleeve that matches
-              in quality and looks.
-            </p>
-          </div>
-
-          <div className="mt-16 space-y-16">
-            {features.map((feature, featureIdx) => (
-              <div
-                key={feature.name}
-                className="flex flex-col-reverse lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-8"
-              >
-                <div
-                  className={classNames(
-                    featureIdx % 2 === 0
-                      ? "lg:col-start-1"
-                      : "lg:col-start-8 xl:col-start-9",
-                    "mt-6 lg:col-span-5 lg:row-start-1 lg:mt-0 xl:col-span-4"
-                  )}
-                >
-                  <h3 className="text-lg font-medium text-gray-900">
-                    {feature.name}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-500">
-                    {feature.description}
-                  </p>
-                </div>
-                <div
-                  className={classNames(
-                    featureIdx % 2 === 0
-                      ? "lg:col-start-6 xl:col-start-5"
-                      : "lg:col-start-1",
-                    "flex-auto lg:col-span-7 lg:row-start-1 xl:col-span-8"
-                  )}
-                >
-                  <div className="aspect-h-2 aspect-w-5 overflow-hidden rounded-lg bg-gray-100">
-                    <Image
-                      alt={feature.imageAlt}
-                      src={feature.imageSrc}
-                      width={500}
-                      height={300}
-                      placeholder="empty"
-                      className="object-cover object-center"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
         <div className="overflow-hidden pt-32 sm:pt-14">
           <div className="bg-gray-800">
