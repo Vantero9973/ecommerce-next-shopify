@@ -3,6 +3,10 @@
 import { Fragment, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import all from "../media/all.jpg";
+import aggressive from "../media/aggressive.jpg";
+import moderate from "../media/moderate.jpeg";
+import neutral from "../media/neutral.png";
 import { useCart } from "../app/context/CartContext";
 import {
   Dialog,
@@ -21,7 +25,6 @@ import {
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
-  QuestionMarkCircleIcon,
   ShoppingCartIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -36,34 +39,38 @@ const navigation = {
         {
           name: "All",
           href: "/products",
+          cta: "Shop all",
           imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
+            "https://d1nymbkeomeoqg.cloudfront.net/photos/28/81/409670_25302_XL.jpg",
           imageAlt:
             "Models sitting back to back, wearing Basic Tee in black and bone.",
         },
         {
-          name: "Neutral",
-          href: "/products/neutral",
+          name: "Aggressive",
+          href: "/products/aggressive",
+          cta: "Shop Now",
           imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
+            "https://d1nymbkeomeoqg.cloudfront.net/photos/24/26/364114_24477_XL.jpg",
           imageAlt:
-            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
+            "Model opening tan leather long wallet with credit card pockets and cash pouch.",
         },
         {
           name: "Moderate",
           href: "/products/moderate",
+          cta: "Shop Now",
           imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg",
+            "https://www.switchbacktravel.com/sites/default/files/image_fields/Best%20Of%20Gear%20Articles/Climbing/Climbing%20Shoes/La%20Sportiva%20TC%20Pro%20climbing%20shoe%20%28edging%29_0.jpeg",
           imageAlt:
             "Model wearing minimalist watch with black wristband and white watch face.",
         },
         {
-          name: "Aggressive",
-          href: "/products/aggressive",
+          name: "Neutral",
+          href: "/products/neutral",
+          cta: "Shop Now",
           imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg",
+            "https://methodclimb.com/wp-content/uploads/2024/03/climbing-shoes.png",
           imageAlt:
-            "Model opening tan leather long wallet with credit card pockets and cash pouch.",
+            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
         },
       ],
     },
@@ -142,16 +149,17 @@ export default function Example() {
                               className="object-cover object-center"
                             />
                           </div>
-                          <a
+                          <Link
                             href={item.href}
                             className="mt-6 block text-sm font-medium text-gray-900"
+                            onClick={() => setOpen(false)}
                           >
                             <span
                               aria-hidden="true"
                               className="absolute inset-0 z-10"
                             />
                             {item.name}
-                          </a>
+                          </Link>
                           <p
                             aria-hidden="true"
                             className="mt-1 text-sm text-gray-500"
@@ -169,12 +177,12 @@ export default function Example() {
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
-                  <a
+                  <Link
                     href={page.href}
                     className="-m-2 block p-2 font-medium text-gray-900"
                   >
                     {page.name}
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -184,21 +192,21 @@ export default function Example() {
 
       <header className="relative">
         <nav aria-label="Top">
-          <div className="bg-gray-900">
+          <div className="bg-gray-800">
             <div className="mx-auto flex h-12 w-full max-w-7xl items-center justify-center px-4 sm:px-6 lg:px-8">
-              <p className="text-sm text-white tracking-wider">
+              <p className="text-sm text-white tracking-wider text-center">
                 Free UPS Ground shipping on orders over $99! Use code SHIPFREE
                 at checkout.
               </p>
             </div>
           </div>
 
-          <div className="bg-white">
+          <div className="bg-white shadow">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex h-[72px] items-center justify-between">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                   <Link href="/">
-                    <span className="sr-only">Your Company</span>
+                    <span className="sr-only">Summit Climbing Co.</span>
                     <GiMountaintop className="my-auto h-10 w-10 rounded-full bg-sky-600 text-white" />
                   </Link>
                 </div>
@@ -209,78 +217,86 @@ export default function Example() {
                       {navigation.categories.map((category) => (
                         <Popover key={category.name} className="flex">
                           <div className="relative flex">
-                            <PopoverButton className="group relative flex items-center justify-center text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-[open]:text-indigo-600">
+                            <PopoverButton className="group relative flex items-center justify-center text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-[open]:text-indigo-600 outline-none focus:outline-none">
                               {category.name}
                               <span
                                 aria-hidden="true"
-                                className="absolute inset-x-0 -bottom-px z-20 h-0.5 transition duration-200 ease-out group-data-[open]:bg-indigo-600"
+                                className="absolute inset-x-0 -bottom-px z-20 h-0.5 transition duration-200 ease-out bg-transparent group-data-[open]:bg-indigo-600"
                               />
                             </PopoverButton>
                           </div>
 
                           <PopoverPanel
                             transition
-                            className="group absolute inset-x-0 top-full z-10 bg-white text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                            className="absolute inset-x-0 top-full z-10 bg-white text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
                           >
-                            <div
-                              aria-hidden="true"
-                              className="absolute inset-0 top-1/2 bg-white shadow"
-                            />
-                            <div
-                              aria-hidden="true"
-                              className="absolute inset-0 top-0 mx-auto h-px max-w-7xl px-8"
-                            >
-                              <div className="h-px w-full bg-transparent transition-colors duration-200 ease-out group-data-[open]:bg-gray-200" />
-                            </div>
+                            {({ close }) => (
+                              <div>
+                                <div
+                                  aria-hidden="true"
+                                  className="absolute inset-0 top-1/2 bg-white shadow"
+                                />
+                                <div
+                                  aria-hidden="true"
+                                  className="absolute inset-0 top-0 mx-auto h-px max-w-7xl px-8"
+                                >
+                                  <div className="h-px w-full bg-transparent transition-colors duration-200 ease-out group-data-[open]:bg-gray-200" />
+                                </div>
 
-                            <div className="relative">
-                              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                                <div className="grid grid-cols-4 gap-x-8 gap-y-10 py-16">
-                                  {category.featured.map((item) => (
-                                    <div
-                                      key={item.name}
-                                      className="group relative"
-                                    >
-                                      <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
-                                        <Image
-                                          alt={item.imageAlt}
-                                          src={item.imageSrc}
-                                          width={500}
-                                          height={300}
-                                          placeholder="empty"
-                                          className="object-cover object-center"
-                                        />
-                                      </div>
-                                      <a
-                                        href={item.href}
-                                        className="mt-4 block font-medium text-gray-900"
-                                      >
-                                        <span
-                                          aria-hidden="true"
-                                          className="absolute inset-0 z-10"
-                                        />
-                                        {item.name}
-                                      </a>
-                                      <p aria-hidden="true" className="mt-1">
-                                        Shop now
-                                      </p>
+                                <div className="relative">
+                                  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                                    <div className="grid grid-cols-4 gap-x-8 gap-y-10 py-16">
+                                      {category.featured.map((item) => (
+                                        <div
+                                          key={item.name}
+                                          className="group relative"
+                                        >
+                                          <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
+                                            <Image
+                                              alt={item.imageAlt}
+                                              src={item.imageSrc}
+                                              width={500}
+                                              height={300}
+                                              placeholder="empty"
+                                              className="object-cover object-center"
+                                            />
+                                          </div>
+                                          <Link
+                                            href={item.href}
+                                            className="mt-4 block font-medium text-gray-900"
+                                            onClick={() => close()}
+                                          >
+                                            <span
+                                              aria-hidden="true"
+                                              className="absolute inset-0 z-10"
+                                            />
+                                            {item.name}
+                                          </Link>
+                                          <p
+                                            aria-hidden="true"
+                                            className="mt-1"
+                                          >
+                                            {item.cta}
+                                          </p>
+                                        </div>
+                                      ))}
                                     </div>
-                                  ))}
+                                  </div>
                                 </div>
                               </div>
-                            </div>
+                            )}
                           </PopoverPanel>
                         </Popover>
                       ))}
 
                       {navigation.pages.map((page) => (
-                        <a
+                        <Link
                           key={page.name}
                           href={page.href}
                           className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
                         >
                           {page.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </PopoverGroup>
@@ -308,17 +324,10 @@ export default function Example() {
                   </div>
                 </div>
 
-                <a href="#" className="lg:hidden">
-                  <span className="sr-only">Your Company</span>
-                  <Image
-                    alt=""
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    width={500}
-                    height={300}
-                    placeholder="empty"
-                    className="!h-8 !w-auto"
-                  />
-                </a>
+                <Link href="/" className="lg:hidden">
+                  <span className="sr-only">Summit Climbing Co.</span>
+                  <GiMountaintop className="my-auto h-10 w-10 rounded-full bg-sky-600 text-white" />
+                </Link>
 
                 <div className="flex flex-1 items-center justify-end">
                   <div

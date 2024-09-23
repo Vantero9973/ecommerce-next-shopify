@@ -4,7 +4,13 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["files.stripe.com", "tailwindui.com"],
+    domains: [
+      "files.stripe.com",
+      "tailwindui.com",
+      "d1nymbkeomeoqg.cloudfront.net",
+      "www.switchbacktravel.com",
+      "methodclimb.com",
+    ],
   },
 };
 
