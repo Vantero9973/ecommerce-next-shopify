@@ -40,37 +40,29 @@ const navigation = {
           name: "All",
           href: "/products",
           cta: "Shop all",
-          imageSrc:
-            "https://d1nymbkeomeoqg.cloudfront.net/photos/28/81/409670_25302_XL.jpg",
-          imageAlt:
-            "Models sitting back to back, wearing Basic Tee in black and bone.",
+          imageSrc: all,
+          imageAlt: "All climbing shoes",
         },
         {
           name: "Aggressive",
           href: "/products/aggressive",
           cta: "Shop Now",
-          imageSrc:
-            "https://d1nymbkeomeoqg.cloudfront.net/photos/24/26/364114_24477_XL.jpg",
-          imageAlt:
-            "Model opening tan leather long wallet with credit card pockets and cash pouch.",
+          imageSrc: aggressive,
+          imageAlt: "Aggressive profile climbing shoes",
         },
         {
           name: "Moderate",
           href: "/products/moderate",
           cta: "Shop Now",
-          imageSrc:
-            "https://www.switchbacktravel.com/sites/default/files/image_fields/Best%20Of%20Gear%20Articles/Climbing/Climbing%20Shoes/La%20Sportiva%20TC%20Pro%20climbing%20shoe%20%28edging%29_0.jpeg",
-          imageAlt:
-            "Model wearing minimalist watch with black wristband and white watch face.",
+          imageSrc: moderate,
+          imageAlt: "Moderate profile climbing shoes",
         },
         {
           name: "Neutral",
           href: "/products/neutral",
           cta: "Shop Now",
-          imageSrc:
-            "https://methodclimb.com/wp-content/uploads/2024/03/climbing-shoes.png",
-          imageAlt:
-            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
+          imageSrc: neutral,
+          imageAlt: "Neutral profile climbing shoes",
         },
       ],
     },
@@ -145,7 +137,7 @@ export default function Example() {
                               src={item.imageSrc}
                               width={500}
                               height={300}
-                              placeholder="empty"
+                              placeholder="blur"
                               className="object-cover object-center"
                             />
                           </div>
@@ -257,7 +249,7 @@ export default function Example() {
                                               src={item.imageSrc}
                                               width={500}
                                               height={300}
-                                              placeholder="empty"
+                                              placeholder="blur"
                                               className="object-cover object-center"
                                             />
                                           </div>
